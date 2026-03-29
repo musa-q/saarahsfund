@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import Slideshow from '@/components/Slideshow'
 
@@ -8,7 +9,7 @@ const locations = [
   { country: 'Syria', flag: '🇸🇾', projects: ['1 conventional incubator at Imaan Hospital (2015)', '6 conventional incubators at Imaan Hospital (2016)', '50 low-cost incubators following earthquakes (2023)', '20 low-cost incubators (2025)'], description: 'Supporting hospitals with life-saving equipment. Our incubators now help 30 children per month.', image: '/images/iman hospital.jpg', videos: ['/videos/syria-vid-1.mp4'] },
   { country: 'Yemen', flag: '🇾🇪', projects: ['1 conventional incubator (2017)', '3 conventional incubators (2022)', '2 conventional incubators (2024)', '20 low-cost incubators (2024)', '10 low-cost incubators (2025)'], description: 'Ongoing support for medical facilities caring for vulnerable newborns.', videos: ['/videos/yemen-vid-1.mp4', '/videos/yemen-vid-2.mp4'] },
   { country: 'Senegal', flag: '🇸🇳', projects: ['11 low-cost incubators following Tivaouane fire (2022)'], description: 'Emergency response following the tragic fire at Tivaouane maternity hospital.', videos: [] },
-  { country: 'Sudan', flag: '🇸🇩', projects: ['2 conventional incubators (2025)', '20 low-cost incubators (2025)'], description: 'Latest project to support newborn care in Sudan.', videos: [] },
+  { country: 'Sudan', flag: '🇸🇩', projects: ['2 conventional incubators (2025)', '20 low-cost incubators (2025)'], description: 'Latest project to support newborn care in Sudan. We are currently running an urgent appeal to provide 50 more incubators across Sudan.', images: ['/images/sudan-baby-1.jpeg', '/images/sudan-training-1.jpeg', '/images/sudan-training-2.jpeg', '/images/sudan-training-3.jpeg'], videos: [], appealLink: '/sudan-incubator-appeal' },
   { country: 'DR Congo', flag: '🇨🇩', projects: ['10 low-cost incubators (2025)'], description: 'Supporting newborn care facilities in the DRC with low-cost incubator technology.', videos: [] },
   { country: 'Ethiopia', flag: '🇪🇹', projects: ['10 low-cost incubators (2025)'], description: 'Providing essential newborn care equipment to Ethiopian medical facilities.', videos: [] },
   { country: 'United Kingdom', flag: '🇬🇧', projects: ["Play Train at Oxford Children's Hospital (2015)", "Equipment for Wheatley Nursery School (2015, 2022)", "RDA Abingdon Indoor Arena contribution (2021)"], description: "Supporting local children with special needs and those attending hospital.", images: ['/images/01040008.jpg', '/images/01040006.jpg', '/images/JRTrainImage1.jpg', '/images/JRTrainImage2.jpg', '/images/JRTrainImage3.jpg'], videos: [] },
@@ -94,7 +95,16 @@ export default function WhereWeWorkClient() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-gray-500 text-sm leading-relaxed">{selected.description}</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{selected.description}</p>
+                {selected.appealLink && (
+                  <Link
+                    href={selected.appealLink}
+                    onClick={() => setSelected(null)}
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6B9C] hover:underline underline-offset-4"
+                  >
+                    To find out more about our Sudan appeal, please click here →
+                  </Link>
+                )}
               </div>
             </motion.div>
           </motion.div>

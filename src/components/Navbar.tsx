@@ -20,6 +20,7 @@ const navItems = [
     submenu: [
       { label: 'Our Impact', href: '/our-impact' },
       { label: 'Where We Work', href: '/where-we-work' },
+      { label: 'Sudan Incubator Appeal', href: '/sudan-incubator-appeal' },
       { label: 'News & Events', href: '/news-and-events' },
       { label: '5 Year Anniversary', href: '/five-year-anniversary' },
       { label: '10 Year Anniversary', href: '/ten-year-anniversary' },

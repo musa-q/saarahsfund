@@ -1,7 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import ImpactMetrics from '@/components/ImpactMetrics'
 import Slideshow from '@/components/Slideshow'
 
@@ -62,16 +61,40 @@ export default function HomePage() {
               <p className="text-white font-semibold text-lg mb-8">
                 That's less than £20 to save a life. Even a small donation can make a huge difference.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
                 <a href="https://wonderful.org/fundraisers/ndpqe" target="_blank" rel="noopener noreferrer" className="btn-white">
-                  Support Sudan Appeal
+                  Support via Wonderful
                 </a>
                 <a href="https://www.paypal.com/GB/fundraiser/charity/3211295" target="_blank" rel="noopener noreferrer" className="btn-outline-white">
                   Donate via PayPal
                 </a>
+                <a href="https://www.gofundme.com/f/sudan-incubator-appeal" target="_blank" rel="noopener noreferrer" className="btn-outline-white">
+                  Donate via GoFundMe
+                </a>
+                <a href="https://www.kindlink.com/fundraising/Saarah-s-Fund/sudan" target="_blank" rel="noopener noreferrer" className="btn-outline-white">
+                  Donate via KindLink
+                </a>
               </div>
               <p className="text-white/80 text-sm mt-5">Your donation is Zakat eligible. Please donate today and help give the gift of life.</p>
+              <div className="mt-5">
+                <Link href="/sudan-incubator-appeal" className="text-white/90 hover:text-white text-sm underline underline-offset-4 font-medium transition-colors">
+                  To find out more about our Sudan work, please click here →
+                </Link>
+              </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Sudan Appeal Photo */}
+      <section className="pb-12">
+        <div className="container-lg">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <img
+              src="/images/sudan-training-1.jpeg"
+              alt="Sudan incubator training — healthcare workers being trained on low-cost incubators"
+              className="w-full rounded-3xl shadow-xl object-cover max-h-[480px]"
+            />
           </motion.div>
         </div>
       </section>
