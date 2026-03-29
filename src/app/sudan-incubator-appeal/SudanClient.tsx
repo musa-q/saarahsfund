@@ -1,11 +1,12 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const donationLinks = [
-  { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/ndpqe', style: 'btn-primary' },
-  { label: 'Donate via PayPal', href: 'https://www.paypal.com/GB/fundraiser/charity/3211295', style: 'btn-outline-brand' },
-  { label: 'Donate via GoFundMe', href: 'https://www.gofundme.com/f/sudan-incubator-appeal', style: 'btn-outline-brand' },
-  { label: 'Donate via KindLink', href: 'https://www.kindlink.com/fundraising/Saarah-s-Fund/sudan', style: 'btn-outline-brand' },
+  { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/ndpqe' },
+  { label: 'Donate via PayPal', href: 'https://www.paypal.com/GB/fundraiser/charity/3211295' },
+  { label: 'Donate via GoFundMe', href: 'https://www.gofundme.com/f/sudan-incubator-appeal' },
+  { label: 'Donate via KindLink', href: 'https://www.kindlink.com/fundraising/Saarah-s-Fund/sudan' },
 ]
 
 const photos = [
@@ -16,6 +17,8 @@ const photos = [
 ]
 
 export default function SudanClient() {
+  const [lightbox, setLightbox] = useState<string | null>(null)
+
   return (
     <div className="section container-lg">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -60,6 +63,7 @@ export default function SudanClient() {
 
         {/* Photo grid */}
         <h2 className="section-title text-center mb-8">Our Work in Sudan</h2>
+        <p className="text-gray-400 text-sm text-center mb-6">Click any photo to view full size</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
           {photos.map((photo, i) => (
             <motion.div
@@ -69,14 +73,26 @@ export default function SudanClient() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className="overflow-hidden rounded-2xl shadow-lg">
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  className="w-full object-cover hover:scale-105 transition-transform duration-500"
-                  style={{ maxHeight: '380px' }}
-                />
-              </div>
+              <button
+                onClick={() => setLightbox(photo.src)}
+                className="w-full overflow-hidden rounded-2xl shadow-lg group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#FF6B9C] focus:ring-offset-2"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    style={{ maxHeight: '380px' }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-2.5">
+                      <svg className="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -135,6 +151,38 @@ export default function SudanClient() {
         </div>
 
       </motion.div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+            onClick={() => setLightbox(null)}
+          >
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+              aria-label="Close"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              src={lightbox}
+              alt="Full size view"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
