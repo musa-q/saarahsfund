@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: { default: "Saarah's Fund", template: "%s | Saarah's Fund" },
   description: "Saarah's Fund is a children's charity providing life-saving incubators for newborns and supporting sick children in the UK and overseas.",
+  icons: { icon: '/favicon.ico' },
   openGraph: {
     type: 'website',
     url: 'https://www.saarahsfund.com',
