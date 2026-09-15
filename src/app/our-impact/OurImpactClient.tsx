@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import ImpactMetrics from '@/components/ImpactMetrics'
+import { charityTotals } from '@/content/site'
 
 const timelineEvents = [
   { year: 2015, events: ["Funded 1 conventional incubator at the Imaan Hospital in Syria", "Installed a Play Train in Community Paediatrics at Oxford Children's Hospital", "Provided two bikes and a giant floor mirror for Wheatley Nursery School"] },
@@ -28,7 +29,10 @@ export default function OurImpactClient() {
         </div>
 
         {/* Detailed Breakdown */}
-        <h2 className="section-title text-center mb-8">Detailed Impact Overview</h2>
+        <h2 className="section-title text-center mb-4">Selected Historical Projects</h2>
+        <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8 leading-relaxed">
+          These projects from 2015–2025 show part of our work. They are not a complete breakdown of the current charity-wide totals above.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="card border-l-4 border-l-[#FF6B9C]">
             <h3 className="text-xl font-bold text-[#FF6B9C] text-center mb-5">261 Low-Cost Incubators</h3>
@@ -72,7 +76,7 @@ export default function OurImpactClient() {
           <h2 className="text-2xl font-bold mb-8">Key Impact Statistics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { stat: '7,000+', desc: 'Life-saving care provided to babies' },
+              { stat: charityTotals.babiesHelped, desc: 'Babies helped across our work' },
               { stat: '360', desc: 'Children helped annually in Syria (30 per month)' },
               { stat: '24', desc: 'Lives saved annually per low-cost incubator' },
             ].map((item) => (

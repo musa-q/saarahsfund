@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import { contactDetails } from '@/content/site'
 
 export default function ContactClient() {
   const shareUrl = 'https://www.saarahsfund.com'
@@ -12,6 +13,20 @@ export default function ContactClient() {
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
         <div className="max-w-xl mx-auto">
+          <section aria-labelledby="contact-details" className="mb-10">
+            <h2 id="contact-details" className="text-2xl font-bold text-gray-800 mb-3">Contact Saarah's Fund</h2>
+            <p className="text-gray-600 leading-relaxed mb-5">For enquiries about our work or supporting the charity, please email or call us.</p>
+            <dl className="space-y-4 text-gray-700">
+              <div>
+                <dt className="font-semibold mb-1">Email</dt>
+                <dd><a href={`mailto:${contactDetails.email}`} className="break-words underline underline-offset-4 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-800">{contactDetails.email}</a></dd>
+              </div>
+              <div>
+                <dt className="font-semibold mb-1">Telephone</dt>
+                <dd><a href={contactDetails.telephoneHref} className="underline underline-offset-4 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-800">{contactDetails.telephone}</a></dd>
+              </div>
+            </dl>
+          </section>
           <div className="gradient-bg rounded-3xl p-8 md:p-10 text-white">
             <h2 className="text-2xl font-bold mb-3">Support Our Work</h2>
             <p className="text-white/85 leading-relaxed mb-6">

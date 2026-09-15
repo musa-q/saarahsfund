@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ImpactMetrics from '@/components/ImpactMetrics'
 import Slideshow from '@/components/Slideshow'
+import { sudanUpdate } from '@/content/site'
 
 const slideshowImages = [
   '/images/sa8-crop-u4525.jpg',
@@ -30,7 +31,7 @@ export default function HomePage() {
                 We provide life-saving incubators for newborns and fund life-enhancing projects for sick children and those with special needs — powered by compassion, commitment and your invaluable support.
               </p>
               <p className="text-[#FF6B9C] font-semibold text-lg mb-8">
-                Every donation matters — just £20 could help save a life.
+                Every donation helps us provide vital equipment and care.
               </p>
               <Link href="/donate" className="btn-primary">
                 Donate Now
@@ -56,10 +57,10 @@ export default function HomePage() {
                 Every hour, a baby dies in Sudan due to inadequate healthcare.
               </p>
               <p className="text-white/85 max-w-2xl mx-auto leading-relaxed mb-3 text-base md:text-lg">
-                Saarah's Fund is raising money to provide 50 low-cost incubators across Sudan — each incubator costs £400 and is expected to save around 24 newborns during the next 12 months.
+                {sudanUpdate.summary}
               </p>
               <p className="text-white font-semibold text-lg mb-8">
-                That's less than £20 to save a life. Even a small donation can make a huge difference.
+                {sudanUpdate.appeal}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
                 <a href="https://wonderful.org/fundraisers/ndpqe" target="_blank" rel="noopener noreferrer" className="btn-white">

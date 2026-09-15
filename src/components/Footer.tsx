@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { contactDetails } from '@/content/site'
 
 export default function Footer() {
   const [showTop, setShowTop] = useState(false)
@@ -79,6 +80,10 @@ export default function Footer() {
               <p className="text-gray-400 text-sm mb-4 leading-relaxed">
                 For inquiries and support, please don't hesitate to reach out.
               </p>
+              <ul className="space-y-3 text-sm mb-5">
+                <li><a href={`mailto:${contactDetails.email}`} className="text-gray-200 break-words underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{contactDetails.email}</a></li>
+                <li><a href={contactDetails.telephoneHref} className="text-gray-200 underline underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">{contactDetails.telephone}</a></li>
+              </ul>
               <Link href="/contact-us"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-colors">
                 Get in Touch

@@ -1,6 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { charityTotals } from '@/content/site'
 import ImpactMetrics from '@/components/ImpactMetrics'
 
 export default function AboutClient() {
@@ -15,7 +15,7 @@ export default function AboutClient() {
             Saarah's Fund is a children's charity. We support sick babies and children, and children with special needs, both in the UK and overseas. We set up Saarah's Fund in memory of Saarah, our beautiful and beloved 4 year old daughter, who passed away completely unexpectedly in her sleep on the 11th of March 2011.
           </p>
           <p className="text-gray-700 leading-relaxed text-lg">
-            Through the generosity of family, friends and complete strangers alike, over the last 13 years, we have raised more than £175,000 for various causes. This includes over 300 incubators for hospitals in Gaza, Senegal, Syria and Yemen, an outdoor play train at the Oxford Children's Hospital, play equipment for the Wheatley Nursery, and a contribution towards the new indoor arena at RDA Abingdon, both of which Saarah used to attend.
+            Through the generosity of family, friends and complete strangers alike, since 2011 we have raised {charityTotals.fundsRaised} for various causes. Our work includes {charityTotals.incubators} incubators for hospitals overseas, helping {charityTotals.babiesHelped} babies, an outdoor play train at the Oxford Children's Hospital, play equipment for the Wheatley Nursery, and a contribution towards the new indoor arena at RDA Abingdon, both of which Saarah used to attend.
           </p>
         </div>
 

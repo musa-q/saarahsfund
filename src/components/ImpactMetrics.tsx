@@ -1,10 +1,11 @@
 'use client'
 import { motion } from 'framer-motion'
+import { charityTotals } from '@/content/site'
 
 const metrics = [
-  { number: '300+', label: 'Incubators Provided', description: 'Helping save newborn lives' },
-  { number: '7,000+', label: 'Babies Helped', description: 'Life-saving care provided' },
-  { number: '£175,000+', label: 'Funds Raised', description: 'Over 13 years of impact' },
+  { number: charityTotals.incubators, label: 'Incubators Provided', description: 'Helping save newborn lives' },
+  { number: charityTotals.babiesHelped, label: 'Babies Helped', description: 'Life-saving care provided' },
+  { number: charityTotals.fundsRaised, label: 'Funds Raised', description: 'Supporting children since 2011' },
 ]
 
 export default function ImpactMetrics() {

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { sudanUpdate } from '@/content/site'
 
 const donationLinks = [
   { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/ndpqe' },
@@ -38,13 +39,13 @@ export default function SudanClient() {
         {/* Appeal detail */}
         <div className="card border-l-4 border-l-[#FF6B9C] mb-10">
           <p className="text-gray-700 leading-relaxed text-lg mb-4">
-            Saarah's Fund is raising money to provide 50 low-cost incubators across Sudan. Each incubator costs £400 and is expected to save around 24 newborns during the next 12 months.
+            {sudanUpdate.summary}
           </p>
           <p className="text-gray-700 leading-relaxed text-lg mb-4">
             Sudan is facing a devastating humanitarian crisis. Hospitals are overwhelmed, medical supplies are scarce, and newborn babies are dying from conditions that are entirely preventable with the right equipment. These low-cost incubators — developed by Embrace Global — are robust, easy to use, and can be operated without a constant power supply, making them ideal for use in Sudan's challenging conditions.
           </p>
           <p className="text-[#FF6B9C] font-semibold text-lg">
-            That's less than £20 to save a life. Even a small donation can make a huge difference.
+            {sudanUpdate.appeal}
           </p>
         </div>
 
@@ -100,9 +101,9 @@ export default function SudanClient() {
         {/* What your money does */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
           {[
-            { amount: '£20', impact: 'Could help save one newborn life' },
-            { amount: '£100', impact: 'Contributes towards a full incubator' },
-            { amount: '£400', impact: 'Funds one complete incubator — saving up to 24 babies a year' },
+            { amount: '£20', impact: 'Contributes towards newborn care equipment' },
+            { amount: '£100', impact: 'Supports our incubator appeal' },
+            { amount: '£400', impact: 'Helps provide incubators for babies in Sudan' },
           ].map((item) => (
             <div key={item.amount} className="card text-center">
               <div className="text-4xl font-extrabold gradient-text mb-2">{item.amount}</div>
@@ -139,7 +140,7 @@ export default function SudanClient() {
         <div className="gradient-bg rounded-3xl p-10 text-white text-center shadow-2xl">
           <h2 className="text-2xl font-bold mb-3">Please Donate Today</h2>
           <p className="text-white/85 max-w-xl mx-auto leading-relaxed mb-6">
-            Every pound you give goes directly to providing life-saving equipment for babies in Sudan. Thank you for your generosity and compassion.
+            Your donation contributes towards vital equipment for babies in Sudan. Thank you for your generosity and compassion.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
             {donationLinks.map((link) => (
