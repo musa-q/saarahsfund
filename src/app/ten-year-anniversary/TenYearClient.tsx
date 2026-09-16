@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 
 const milestones = [
   { year: '2011', title: 'In Memory of Saarah', description: "Saarah passed away unexpectedly in her sleep on March 11th, 2011, inspiring the creation of our charity.", image: '/images/16012010184.jpg' },
@@ -19,7 +18,7 @@ export default function TenYearClient() {
           In 2021, we marked 10 years since Saarah's passing. A decade of hope, healing, and helping children across the world.
         </p>
 
-        <h2 className="section-title text-center mb-10">A Decade of Making a Difference</h2>
+        <h2 className="section-title text-center mb-10">Milestones: Our First Decade and Beyond</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {milestones.map((m, i) => (

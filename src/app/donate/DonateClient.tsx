@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import Modal from '@/components/Modal'
 
 const platforms = [
   { name: 'Wonderful.org', description: 'Support our campaigns through Wonderful.org. Choose specific projects to support.', link: 'https://wonderful.org/charities/1143322', icon: '/images/wonderful.svg' },
@@ -64,44 +65,35 @@ export default function DonateClient() {
       </motion.div>
 
       {/* Campaigns Modal */}
-      <AnimatePresence>
-        {modalOpen && (
+      {modalOpen && (
+        <Modal label="Choose a Campaign to Support" onClose={() => setModalOpen(false)} className="bg-black/50">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-            onClick={() => setModalOpen(false)}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-3xl p-8 max-w-lg w-full max-h-[90dvh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">Choose a Campaign to Support</h3>
-                  <p className="text-gray-500 text-sm mt-1">Select from our current fundraising campaigns</p>
-                </div>
-                <button onClick={() => setModalOpen(false)} className="p-2 rounded-full hover:bg-gray-100 transition-colors ml-4 flex-shrink-0">
-                  <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">Choose a Campaign to Support</h3>
+                <p className="text-gray-500 text-sm mt-1">Select from our current fundraising campaigns</p>
               </div>
-              <div className="space-y-3">
-                {campaigns.map((campaign) => (
-                  <a key={campaign.link} href={campaign.link} target="_blank" rel="noopener noreferrer"
-                    className="block p-4 rounded-2xl bg-gray-50 hover:bg-pink-50 border border-gray-100 hover:border-pink-200 transition-colors group">
-                    <span className="font-medium text-gray-800 group-hover:text-pink-600 transition-colors">{campaign.title}</span>
-                    <span className="block text-xs text-gray-400 mt-1">wonderful.org</span>
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+              <button type="button" aria-label="Close dialog" autoFocus onClick={() => setModalOpen(false)} className="p-2 rounded-full hover:bg-gray-100 transition-colors ml-4 flex-shrink-0">
+                <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <div className="space-y-3">
+              {campaigns.map((campaign) => (
+                <a key={campaign.link} href={campaign.link} target="_blank" rel="noopener noreferrer"
+                  className="block p-4 rounded-2xl bg-gray-50 hover:bg-pink-50 border border-gray-100 hover:border-pink-200 transition-colors group">
+                  <span className="font-medium text-gray-800 group-hover:text-pink-600 transition-colors">{campaign.title}</span>
+                  <span className="block text-xs text-gray-600 mt-1">wonderful.org</span>
+                </a>
+              ))}
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </Modal>
+      )}
     </div>
   )
 }

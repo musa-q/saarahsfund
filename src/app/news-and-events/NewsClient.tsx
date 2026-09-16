@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import Modal from '@/components/Modal'
 import Slideshow from '@/components/Slideshow'
 
 const events = [
@@ -57,14 +58,14 @@ export default function NewsClient() {
             <motion.div key={event.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
               <div className="card overflow-hidden p-0">
                 <div className="grid grid-cols-1 md:grid-cols-2">
-                  <div className="relative overflow-hidden cursor-pointer group" onClick={() => setSelectedEvent(event)} style={{ minHeight: 240 }}>
+                  <button type="button" aria-label={`View ${event.title} gallery`} className="relative overflow-hidden cursor-pointer group text-left" onClick={() => setSelectedEvent(event)} style={{ minHeight: 240 }}>
                     <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" style={{ minHeight: 240 }} onError={(e) => { (e.target as HTMLImageElement).src = '/images/heart.png'; }} />
                     {event.date && (
                       <span className="absolute top-4 left-4 gradient-bg text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                         {event.date}
                       </span>
                     )}
-                  </div>
+                  </button>
                   <div className="p-6 md:p-8 flex flex-col justify-between">
                     <div>
                       <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-3">{event.title}</h3>
@@ -93,7 +94,7 @@ export default function NewsClient() {
                   <span className="gradient-text font-bold text-sm">{item.year}</span>
                   <p className="text-gray-700 font-medium text-sm mt-1 mb-2">{item.activity}</p>
                   {item.link && (
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xs text-[#FF6B9C] hover:underline font-medium">
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xs text-[#a82258] hover:underline font-medium">
                       View Campaign →
                     </a>
                   )}
@@ -105,34 +106,25 @@ export default function NewsClient() {
       </motion.div>
 
       {/* Gallery Modal */}
-      <AnimatePresence>
-        {selectedEvent && (
+      {selectedEvent && (
+        <Modal label={selectedEvent.title} onClose={() => setSelectedEvent(null)} className="bg-black/60">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-            onClick={() => setSelectedEvent(null)}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-3xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-3xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-bold text-gray-800">{selectedEvent.title}</h3>
-                <button onClick={() => setSelectedEvent(null)} className="p-2 rounded-full hover:bg-gray-100 transition-colors ml-4">
-                  <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-              </div>
-              <Slideshow images={selectedEvent.images} className="h-64 md:h-80 mb-4" />
-              <p className="text-gray-600 leading-relaxed text-sm">{selectedEvent.description}</p>
-            </motion.div>
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-xl font-bold text-gray-800">{selectedEvent.title}</h3>
+              <button type="button" aria-label="Close dialog" autoFocus onClick={() => setSelectedEvent(null)} className="p-2 rounded-full hover:bg-gray-100 transition-colors ml-4">
+                <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <Slideshow images={selectedEvent.images} className="h-64 md:h-80 mb-4" />
+            <p className="text-gray-600 leading-relaxed text-sm">{selectedEvent.description}</p>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </Modal>
+      )}
     </div>
   )
 }

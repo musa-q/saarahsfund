@@ -1,10 +1,10 @@
 # Saarah's Fund website
 
-Next.js 14 App Router website using React, TypeScript, Tailwind CSS and Framer Motion. Production is a static export hosted by Kualo at https://www.saarahsfund.com/.
+Next.js 16 App Router website using React 19, TypeScript, Tailwind CSS and Framer Motion. Production is a static export hosted by Kualo at https://www.saarahsfund.com/.
 
 ## Run and check
 
-Use Node.js 20 to match the deployment workflow, with npm and the committed lockfile.
+Use Node.js 22.13 or newer to match the deployment workflow, with npm and the committed lockfile.
 
 ```sh
 npm ci
@@ -14,18 +14,22 @@ npm run dev
 The development server normally runs at http://localhost:3000. For production verification:
 
 ```sh
+npm run lint
+npm test
 npm run build
-npx tsc --noEmit --incremental false
+npm run typecheck
 git diff --check
 ```
 
-The build writes the complete static site to `out/`. Preview that directory with a static HTTP server, for example, if Python is installed:
+The build writes the complete static site to `out/`. Start the preview at http://127.0.0.1:3000 with `npm start`. Alternatively, if Python is installed:
 
 ```sh
 python -m http.server 3000 --bind 127.0.0.1 --directory out
 ```
 
-Do not use `npm start` for this export: the existing script invokes `next start`, which expects a server build. `npm run lint` exists but ESLint has not been configured in this repository; it may prompt for setup. No automated test suite is configured.
+Development and preview servers bind to localhost. Build before starting the preview. ESLint runs separately from the Next build; existing image optimization warnings remain on this static export. `npm test` checks export normalization; no permanent browser test suite is configured. See the repair report for browser checks performed.
+
+The build automatically runs `scripts/normalize-export.mjs` to work around a [Next.js Windows export defect](https://github.com/vercel/next.js/issues/92339): it adds the flat route-payload filenames requested by browser navigation. Correct Linux exports are unchanged. Deploy the complete resulting `out/` directory.
 
 ## Where to edit
 
@@ -33,7 +37,7 @@ Do not use `npm start` for this export: the existing script invokes `next start`
 | --- | --- |
 | Current charity totals and contact details | `src/content/site.ts` |
 | Shared impact metrics | `src/components/ImpactMetrics.tsx` |
-| Homepage | `src/app/page.tsx` |
+| Homepage | `src/app/HomeClient.tsx` (content), `src/app/page.tsx` (metadata) |
 | About | `src/app/about/AboutClient.tsx` |
 | Our Impact and historical breakdown | `src/app/our-impact/OurImpactClient.tsx` |
 | Sudan appeal and search description | `src/app/sudan-incubator-appeal/SudanClient.tsx`, `page.tsx` |
@@ -56,7 +60,7 @@ Edit the source, rebuild, and deploy the **entire `out/` directory**, including 
 
 `.github/workflows/deploy.yml` runs on a push to `master` in `musa-q/saarahsfund`. It installs dependencies, builds, and uploads `out/` via FTP to Kualo using the repository secrets `FTP_SERVER`, `FTP_USERNAME`, and `FTP_PASSWORD`.
 
-**Before triggering a release:** the existing workflow has `server-dir: /` and `dangerous-clean-slate: true`, which deletes the destination contents before upload. Confirm the FTP account is restricted to the intended website root and retain a recoverable copy of server-only files and the current deployment. Do not assume `/` is a safe destination from the workflow alone. Credentials belong in repository secrets, never source or documentation.
+**Before triggering a release:** confirm the FTP account is restricted to the intended website root (`server-dir: /`) and retain a recoverable copy of server-only files and the current deployment. Clean-slate deletion is disabled and deployments are serialized. Synchronization can still overwrite tracked files and is not atomic. Do not assume `/` is safely scoped from the workflow alone. Credentials belong in repository secrets, never source or documentation.
 
 1. Review and verify source changes and the complete local export.
 2. Confirm the FTP destination and backup, then publish through the repository's deployment process.
@@ -68,3 +72,5 @@ Edit the source, rebuild, and deploy the **entire `out/` directory**, including 
 ## Current maintenance scope
 
 See [the maintenance plan](docs/maintenance-plan.md). Contact uses direct email and telephone links; no enquiry form or delivery service is introduced. Missing Dongola media and unspecified follow-up changes remain deferred. The July reference to the earlier message is interpreted as the May continuation appeal update, not a requirement to publish omitted media.
+
+See [the site repair report](docs/site-repairs.md) for keyboard/mobile fixes, contrast improvements, sitemap and metadata repairs, dependency updates and verification.

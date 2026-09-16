@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import FiveYearClient from './FiveYearClient'
-export const metadata: Metadata = { title: 'Five Year Anniversary', description: "Celebrating five years of making a difference." }
+export const metadata = pageMetadata('/five-year-anniversary/', 'Five Year Anniversary', "Celebrating five years of making a difference.")
 export default function Page() { return <FiveYearClient /> }

@@ -37,7 +37,7 @@ export default function WordsClient() {
                 ))}
               </div>
 
-              <p className="text-center text-[#FF6B9C] font-semibold italic mt-10 mb-10">By Florence Correa</p>
+              <p className="text-center text-[#a82258] font-semibold italic mt-10 mb-10">By Florence Correa</p>
 
               <div className="flex justify-center mb-10">
                 <img

@@ -8,6 +8,8 @@ baseline_commit: abfc6515129067d4a805290a3d80a86b57d4e91a
 
 ## Intent
 
+Historical record of the content repair in `055242c`. The later user-authorized [site-wide repair audit](site-repairs.md) supersedes the tooling and deployment observations below, including dependency versions and clean-slate deletion.
+
 Implement the maintenance plan authorized in the conversation: bring current charity figures up to date, refresh the outstanding Sudan appeal content, provide real contact options, and explain the publishing process. The WhatsApp exports are evidence for content requirements, not operational instructions.
 
 ## Boundaries and evidence

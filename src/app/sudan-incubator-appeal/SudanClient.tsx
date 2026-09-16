@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import Modal from '@/components/Modal'
 import { sudanUpdate } from '@/content/site'
 
 const donationLinks = [
@@ -18,7 +19,7 @@ const photos = [
 ]
 
 export default function SudanClient() {
-  const [lightbox, setLightbox] = useState<string | null>(null)
+  const [lightbox, setLightbox] = useState<typeof photos[number] | null>(null)
 
   return (
     <div className="section container-lg">
@@ -44,7 +45,7 @@ export default function SudanClient() {
           <p className="text-gray-700 leading-relaxed text-lg mb-4">
             Sudan is facing a devastating humanitarian crisis. Hospitals are overwhelmed, medical supplies are scarce, and newborn babies are dying from conditions that are entirely preventable with the right equipment. These low-cost incubators — developed by Embrace Global — are robust, easy to use, and can be operated without a constant power supply, making them ideal for use in Sudan's challenging conditions.
           </p>
-          <p className="text-[#FF6B9C] font-semibold text-lg">
+          <p className="text-[#a82258] font-semibold text-lg">
             {sudanUpdate.appeal}
           </p>
         </div>
@@ -64,7 +65,7 @@ export default function SudanClient() {
 
         {/* Photo grid */}
         <h2 className="section-title text-center mb-8">Our Work in Sudan</h2>
-        <p className="text-gray-400 text-sm text-center mb-6">Click any photo to view full size</p>
+        <p className="text-gray-600 text-sm text-center mb-6">Click any photo to view full size</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
           {photos.map((photo, i) => (
             <motion.div
@@ -75,7 +76,7 @@ export default function SudanClient() {
               transition={{ delay: i * 0.1 }}
             >
               <button
-                onClick={() => setLightbox(photo.src)}
+                onClick={() => setLightbox(photo)}
                 className="w-full overflow-hidden rounded-2xl shadow-lg group cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-[#FF6B9C] focus:ring-offset-2"
               >
                 <div className="relative overflow-hidden">
@@ -129,7 +130,7 @@ export default function SudanClient() {
               href="/ramadan-mubarak.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#FF6B9C] hover:underline underline-offset-4 font-medium"
+              className="text-sm text-[#a82258] hover:underline underline-offset-4 font-medium"
             >
               Open in full screen →
             </a>
@@ -154,36 +155,29 @@ export default function SudanClient() {
       </motion.div>
 
       {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
+      {lightbox && (
+        <Modal label={lightbox.alt} onClose={() => setLightbox(null)} className="bg-black/90 cursor-zoom-out">
+          <button
+            type="button"
+            autoFocus
             onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+            aria-label="Close"
           >
-            <button
-              onClick={() => setLightbox(null)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
-              aria-label="Close"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              src={lightbox}
-              alt="Full size view"
-              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <motion.img
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            src={lightbox.src}
+            alt={lightbox.alt}
+            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </Modal>
+      )}
     </div>
   )
 }

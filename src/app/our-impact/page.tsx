@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import OurImpactClient from './OurImpactClient'
-export const metadata: Metadata = { title: 'Our Impact', description: "Discover the impact of Saarah's Fund across the globe." }
+export const metadata = pageMetadata('/our-impact/', 'Our Impact', "Discover the impact of Saarah's Fund across the globe.")
 export default function Page() { return <OurImpactClient /> }

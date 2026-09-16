@@ -35,7 +35,7 @@ export default function OurImpactClient() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="card border-l-4 border-l-[#FF6B9C]">
-            <h3 className="text-xl font-bold text-[#FF6B9C] text-center mb-5">261 Low-Cost Incubators</h3>
+            <h3 className="text-xl font-bold text-[#a82258] text-center mb-5">261 Low-Cost Incubators</h3>
             <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
               <p><strong>2022:</strong> 11 in Senegal following a fire at the maternity hospital in Tivaouane in which 11 babies tragically lost their lives</p>
               <p><strong>2023:</strong> 50 in Northern Syria following the devastating earthquakes there and in Turkiye in February 2023</p>
@@ -46,7 +46,7 @@ export default function OurImpactClient() {
             <p className="text-gray-500 text-xs italic text-center mt-4">Each low-cost incubator is used by an average of 2 babies each month</p>
           </div>
           <div className="card border-l-4 border-l-[#4EADFF]">
-            <h3 className="text-xl font-bold text-[#4EADFF] text-center mb-5">15 Conventional Incubators</h3>
+            <h3 className="text-xl font-bold text-[#165e9a] text-center mb-5">15 Conventional Incubators</h3>
             <div className="space-y-2 text-sm text-gray-700 leading-relaxed">
               <p><strong>2015:</strong> 1 at the Imaan Hospital in Syria</p>
               <p><strong>2016:</strong> 6 at the Imaan Hospital in Syria</p>
@@ -94,7 +94,7 @@ export default function OurImpactClient() {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#FF6B9C] to-[#4EADFF]" />
           <div className="space-y-8">
             {timelineEvents.map((item, i) => (
-              <motion.div key={item.year} initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              <motion.div key={item.year} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
                 className={`relative pl-12 md:pl-0 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'md:ml-0 md:pr-12' : 'md:ml-[calc(50%+2rem)]'}`}>
                 <div className="absolute left-2.5 md:left-auto md:right-auto top-4 w-3 h-3 rounded-full gradient-bg" style={i % 2 === 0 ? { right: 'auto', left: '8px' } : { left: '8px' }} />
                 <div className="card">
@@ -102,7 +102,7 @@ export default function OurImpactClient() {
                   <ul className="space-y-1">
                     {item.events.map((event, j) => (
                       <li key={j} className="text-gray-500 text-sm flex items-start gap-2">
-                        <span className="text-[#FF6B9C] mt-1 flex-shrink-0">•</span>
+                        <span className="text-[#a82258] mt-1 flex-shrink-0">•</span>
                         {event}
                       </li>
                     ))}

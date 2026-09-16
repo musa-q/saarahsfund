@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import Modal from '@/components/Modal'
 import Slideshow from '@/components/Slideshow'
 import { sudanUpdate } from '@/content/site'
 
@@ -37,80 +38,71 @@ export default function WhereWeWorkClient() {
               <button className="card w-full text-left hover:shadow-xl hover:border-pink-200 border border-transparent cursor-pointer group transition-all" onClick={() => setSelected(loc)}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">{loc.flag}</span>
-                  <h3 className="font-bold text-gray-800 text-xl group-hover:text-[#FF6B9C] transition-colors">{loc.country}</h3>
+                  <h3 className="font-bold text-gray-800 text-xl group-hover:text-[#a82258] transition-colors">{loc.country}</h3>
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed">{loc.description}</p>
-                <span className="text-xs text-[#FF6B9C] font-medium mt-3 inline-block">View projects →</span>
+                <span className="text-xs text-[#a82258] font-medium mt-3 inline-block">View projects →</span>
               </button>
             </motion.div>
           ))}
         </div>
       </motion.div>
 
-      <AnimatePresence>
-        {selected && (
+      {selected && (
+        <Modal label={selected.country} onClose={() => setSelected(null)} className="bg-black/60">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-            onClick={() => setSelected(null)}
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            className="bg-white rounded-3xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="bg-white rounded-3xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-5">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">{selected.flag}</span>
-                  <h3 className="text-2xl font-bold text-gray-800">{selected.country}</h3>
-                </div>
-                <button onClick={() => setSelected(null)} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-                  <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
+            <div className="flex justify-between items-start mb-5">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{selected.flag}</span>
+                <h3 className="text-2xl font-bold text-gray-800">{selected.country}</h3>
               </div>
+              <button type="button" aria-label="Close dialog" autoFocus onClick={() => setSelected(null)} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
 
-              {selected.images && selected.images.length > 0 && (
-                <Slideshow images={selected.images} className="h-56 mb-5" />
-              )}
-              {selected.videos && selected.videos.length > 0 && (
-                <div className="space-y-3 mb-5">
-                  {selected.videos.map((v, i) => (
-                    <video key={i} controls className="w-full rounded-xl bg-gray-900" style={{ maxHeight: 280 }}>
-                      <source src={v} type="video/mp4" />
-                    </video>
-                  ))}
-                </div>
-              )}
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-3">Our Projects</h4>
-                <ul className="space-y-2 mb-4">
-                  {selected.projects.map((p, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                      <span className="text-[#FF6B9C] mt-0.5 flex-shrink-0">•</span>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{selected.description}</p>
-                {selected.appealLink && (
-                  <Link
-                    href={selected.appealLink}
-                    onClick={() => setSelected(null)}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#FF6B9C] hover:underline underline-offset-4"
-                  >
-                    To find out more about our Sudan appeal, please click here →
-                  </Link>
-                )}
+            {selected.images && selected.images.length > 0 && (
+              <Slideshow images={selected.images} className="h-56 mb-5" />
+            )}
+            {selected.videos && selected.videos.length > 0 && (
+              <div className="space-y-3 mb-5">
+                {selected.videos.map((v, i) => (
+                  <video key={i} controls preload="none" aria-label={`${selected.country} project video ${i + 1}`} className="w-full rounded-xl bg-gray-900" style={{ maxHeight: 280 }}>
+                    <source src={v} type="video/mp4" />
+                  </video>
+                ))}
               </div>
-            </motion.div>
+            )}
+
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-3">Our Projects</h4>
+              <ul className="space-y-2 mb-4">
+                {selected.projects.map((p, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="text-[#a82258] mt-0.5 flex-shrink-0">•</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-gray-500 text-sm leading-relaxed mb-4">{selected.description}</p>
+              {selected.appealLink && (
+                <Link
+                  href={selected.appealLink}
+                  onClick={() => setSelected(null)}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#a82258] hover:underline underline-offset-4"
+                >
+                  To find out more about our Sudan appeal, please click here →
+                </Link>
+              )}
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </Modal>
+      )}
     </div>
   )
 }

@@ -20,7 +20,7 @@ export default function ImpactMetrics() {
           transition={{ duration: 0.5, delay: i * 0.15 }}
         >
           <div className="card text-center hover:shadow-xl">
-            <div className="text-5xl md:text-6xl font-extrabold gradient-text mb-2">{metric.number}</div>
+            <div className="text-4xl md:text-3xl lg:text-5xl font-extrabold gradient-text mb-2">{metric.number}</div>
             <div className="font-semibold text-gray-800 text-lg mb-1">{metric.label}</div>
             <div className="text-gray-500 text-sm">{metric.description}</div>
           </div>

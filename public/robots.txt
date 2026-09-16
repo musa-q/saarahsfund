@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saarahsfund.org/sitemap.xml
+Sitemap: https://www.saarahsfund.com/sitemap.xml
