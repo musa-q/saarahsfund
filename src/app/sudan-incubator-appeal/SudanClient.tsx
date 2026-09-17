@@ -18,6 +18,11 @@ const photos = [
   { src: '/images/sudan-training-3.jpeg', alt: 'Incubator training session with healthcare workers in Sudan' },
 ]
 
+const dongolaPhotos = [
+  { src: '/images/dongola-hospital.png', alt: "Collage of incubators and staff at Dongola Maternity Hospital, with a banner acknowledging Saarah's Fund", caption: 'Incubators installed at Dongola Maternity Hospital.' },
+  { src: '/images/dongola-impact.jpeg', alt: 'Dongola impact summary: two operational incubators, 240 newborns reached and a 40% increase in neonatal care capacity', caption: 'Project impact reported in the May 2026 update.' },
+]
+
 export default function SudanClient() {
   const [lightbox, setLightbox] = useState<typeof photos[number] | null>(null)
 
@@ -62,6 +67,37 @@ export default function SudanClient() {
             ))}
           </div>
         </div>
+
+        <section aria-labelledby="dongola-heading" className="mb-12">
+          <h2 id="dongola-heading" className="section-title mb-3">Dongola Maternity Hospital: incubators in use</h2>
+          <p className="text-gray-600 text-sm mb-4">Update shared on 25 May 2026</p>
+          <p className="text-gray-700 leading-relaxed mb-4">
+            The two neonatal incubators funded by your donations in 2025 are installed and operational at Dongola Maternity Hospital. By this update, they had reached 240 newborns: 120 girls and 120 boys.
+          </p>
+          <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+            <li>Neonatal care capacity increased by 40%.</li>
+            <li>Emergency referrals for premature and critically ill newborns were reduced.</li>
+            <li>Staff training strengthened local healthcare capacity.</li>
+          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {dongolaPhotos.map((photo) => (
+              <figure key={photo.src}>
+                <button type="button" onClick={() => setLightbox(photo)} className="block w-full cursor-zoom-in" aria-label={`View full size: ${photo.alt}`}>
+                  <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full h-auto object-contain" />
+                </button>
+                <figcaption className="text-sm text-gray-600 mt-2">{photo.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">Video update from the hospital</h3>
+          <video controls playsInline preload="none" poster="/images/dongola-video-poster.jpg" aria-label="Dongola Maternity Hospital incubator feedback video" className="w-full aspect-video bg-black">
+            <source src="/videos/dongola-hospital-feedback.mp4" type="video/mp4" />
+            Your browser does not support embedded video.
+          </video>
+          <p className="text-sm text-gray-600 mt-3">
+            <a href="/videos/dongola-hospital-feedback.mp4" className="underline underline-offset-4">Open the hospital feedback video</a>
+          </p>
+        </section>
 
         {/* Photo grid */}
         <h2 className="section-title text-center mb-8">Our Work in Sudan</h2>

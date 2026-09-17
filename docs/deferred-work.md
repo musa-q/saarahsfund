@@ -8,7 +8,7 @@
 ## Content follow-up
 
 - Confirm the July reference to the "second message" if the dated May continuation appeal update is not what Talib intended.
-- Collect the unspecified small changes and new material when Talib is ready. Omitted Dongola images/video are not available in the chat export and were not fabricated or substituted.
+- Collect the unspecified small changes and new material when Talib is ready. The two Dongola images and feedback video were supplied on 17 September 2026 and added to a separate, dated May 2026 update on the Sudan appeal page.
 - Existing hourly mortality claims, Zakat eligibility copy and historical estimates were not independently audited in this maintenance task.
 
 ## Technical follow-up

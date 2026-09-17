@@ -35,6 +35,8 @@ No changes have been pushed or deployed. FTP account scope, server-only files an
 
 ## Verification
 
+Subsequent user-requested adjustment: removed the slideshow play/pause button. Rotation is automatic, pauses temporarily while hovered or focused, and resumes on leaving the gallery. Reduced-motion preferences remain respected.
+
 - Production build and automatic postbuild succeeded; 13 Windows route-segment aliases were generated. TypeScript and whitespace checks passed.
 - ESLint passed with no errors and nine existing raw-image optimization warnings. `npm audit` reported zero vulnerabilities in the installed dependency tree.
 - All three export-normalizer tests passed, including repeated execution and conflicting-file protection.
