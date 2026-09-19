@@ -5,9 +5,7 @@ import Modal from '@/components/Modal'
 
 const platforms = [
   { name: 'Wonderful.org', description: 'Support our campaigns through Wonderful.org. Choose specific projects to support.', link: 'https://wonderful.org/charities/1143322', icon: '/images/wonderful.svg' },
-  { name: 'PayPal', description: 'Donate easily and securely using PayPal. Fast and convenient for global supporters.', link: 'https://www.paypal.com/GB/fundraiser/charity/3211295', icon: '/images/Paypal.png' },
-  { name: 'KindLink', description: 'Make a secure donation through KindLink. Perfect for one-time or recurring donations.', link: 'https://donate.kindlink.com/Saarah-s-Fund/2883', icon: '/images/kindlink.png' },
-  { name: 'JustGiving', description: 'Donate through JustGiving, a trusted platform for charitable giving in the UK.', link: 'https://www.justgiving.com/search?q=saarah%27s+fund', icon: '/images/heart.png' },
+  { name: 'JustGiving', description: 'Donate through JustGiving, a trusted platform for charitable giving in the UK.', link: 'https://checkout.justgiving.com/gbr4stupkl', icon: '/images/heart.png' },
 ]
 
 const campaigns = [
@@ -39,7 +37,7 @@ export default function DonateClient() {
 
         <h2 className="section-title text-center mb-8">Choose How to Donate</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
           {platforms.map((platform, i) => (
             <motion.div key={platform.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
               <div className="card flex flex-col h-full hover:shadow-xl">

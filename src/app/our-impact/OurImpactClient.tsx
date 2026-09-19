@@ -14,6 +14,22 @@ const timelineEvents = [
   { year: 2025, events: ["Funded 2 conventional incubators in Sudan", "Funded 20 low-cost incubators in Syria"] },
 ]
 
+const lowCostIncubatorProjects = [
+  { period: '2022', location: 'Senegal', count: 11, detail: 'following the Tivaouane maternity hospital fire' },
+  { period: '2023', location: 'Northern Syria', count: 50, detail: 'following the earthquakes in Syria and Turkiye' },
+  { period: '2024', location: 'Yemen', count: 20 },
+  { period: '2024', location: 'Gaza', count: 160 },
+  { period: '2025', location: 'Syria', count: 20 },
+  { period: '2025', location: 'Yemen', count: 10 },
+  { period: '2025', location: 'DR Congo', count: 10 },
+  { period: '2025', location: 'Ethiopia', count: 10 },
+  { period: 'By May 2026', location: 'Sudan', count: 100, detail: 'including the 20 funded in 2025' },
+  { location: 'Tanzania', count: 10 },
+  { location: 'Zambia', count: 10 },
+] as const
+
+const lowCostIncubatorTotal = lowCostIncubatorProjects.reduce((total, project) => total + project.count, 0)
+
 export default function OurImpactClient() {
   return (
     <div className="section container-lg">
@@ -31,17 +47,19 @@ export default function OurImpactClient() {
         {/* Detailed Breakdown */}
         <h2 className="section-title text-center mb-4">Selected Historical Projects</h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-8 leading-relaxed">
-          These projects from 2015–2025 show part of our work. They are not a complete breakdown of the current charity-wide totals above.
+          The low-cost incubator records below total 411 funded. Alongside our conventional incubators and UK projects, they show selected parts of our wider work rather than a complete breakdown of the charity-wide totals above.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="card border-l-4 border-l-[#FF6B9C]">
-            <h3 className="text-xl font-bold text-[#a82258] text-center mb-5">261 Low-Cost Incubators</h3>
+            <h3 className="text-xl font-bold text-[#a82258] text-center mb-5">{lowCostIncubatorTotal} Low-Cost Incubators Funded</h3>
             <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
-              <p><strong>2022:</strong> 11 in Senegal following a fire at the maternity hospital in Tivaouane in which 11 babies tragically lost their lives</p>
-              <p><strong>2023:</strong> 50 in Northern Syria following the devastating earthquakes there and in Turkiye in February 2023</p>
-              <p><strong>2024:</strong> 20 in Yemen</p>
-              <p><strong>2024:</strong> 160 in Gaza</p>
-              <p><strong>2025:</strong> 20 in Syria</p>
+              {lowCostIncubatorProjects.map((project) => (
+                <p key={`${'period' in project ? project.period : 'undated'}-${project.location}`}>
+                  {'period' in project ? <><strong>{project.period}:</strong>{' '}</> : null}
+                  {project.count} in {project.location}
+                  {'detail' in project ? `, ${project.detail}` : ''}
+                </p>
+              ))}
             </div>
             <p className="text-gray-500 text-xs italic text-center mt-4">Each low-cost incubator is used by an average of 2 babies each month</p>
           </div>
