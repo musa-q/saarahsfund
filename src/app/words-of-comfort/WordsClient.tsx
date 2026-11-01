@@ -17,7 +17,7 @@ export default function WordsClient() {
   return (
     <div className="section">
       <div className="max-w-2xl mx-auto px-4">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="glass rounded-3xl overflow-hidden">
             <div className="h-1 gradient-bg" />
             <div className="p-8 md:p-12">
@@ -26,7 +26,7 @@ export default function WordsClient() {
 
               <div className="space-y-8">
                 {poem.map((stanza, i) => (
-                  <motion.div key={i} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                  <motion.div key={i} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                     className="text-center hover:-translate-y-1 transition-transform duration-300">
                     {stanza.map((line, j) => (
                       <p key={j} className={`font-serif italic text-gray-700 leading-loose text-lg ${j === 0 ? 'mb-1' : ''}`}>

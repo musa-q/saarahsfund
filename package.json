@@ -9,12 +9,13 @@
     "lint": "eslint src",
     "typecheck": "tsc --noEmit --incremental false",
     "postbuild": "node scripts/normalize-export.mjs",
-    "test": "node --test scripts/normalize-export.test.mjs"
+    "test": "node --test scripts/normalize-export.test.mjs",
+    "verify:export": "node --test scripts/verify-export.test.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.0",
-    "next": "16.3.5",
+    "next": "16.4.3",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -24,7 +25,7 @@
     "@types/react-dom": "19.3.0",
     "autoprefixer": "^10.0.1",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.3.5",
+    "eslint-config-next": "16.4.3",
     "postcss": "^8",
     "serve": "14.2.6",
     "tailwindcss": "^3.4.1",

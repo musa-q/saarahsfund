@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import './design.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import MotionProvider from '@/components/MotionProvider'
@@ -19,12 +20,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="flex flex-col min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
+    <html lang="en-GB">
+      <body id="top">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <MotionProvider>
           <Navbar />
-          <main id="main-content" tabIndex={-1} className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="site-main">{children}</main>
           <Footer />
         </MotionProvider>
       </body>

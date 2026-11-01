@@ -25,8 +25,8 @@ export default function WhereWeWorkClient() {
   const [selected, setSelected] = useState<Location | null>(null)
 
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="where-we-work">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">Where We Work</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-6" />
         <p className="text-gray-600 text-center text-lg max-w-2xl mx-auto mb-5 leading-relaxed">
@@ -36,7 +36,7 @@ export default function WhereWeWorkClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {locations.map((loc, i) => (
-            <motion.div key={loc.country} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}>
+            <motion.div key={loc.country} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}>
               <button className="card w-full text-left hover:shadow-xl hover:border-pink-200 border border-transparent cursor-pointer group transition-all" onClick={() => setSelected(loc)}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">{loc.flag}</span>

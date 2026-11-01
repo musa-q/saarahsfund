@@ -32,8 +32,8 @@ const lowCostIncubatorTotal = lowCostIncubatorProjects.reduce((total, project) =
 
 export default function OurImpactClient() {
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="our-impact">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">Our Impact</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-6" />
         <p className="text-gray-600 text-center text-lg max-w-2xl mx-auto mb-14 leading-relaxed">
@@ -112,7 +112,7 @@ export default function OurImpactClient() {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#FF6B9C] to-[#4EADFF]" />
           <div className="space-y-8">
             {timelineEvents.map((item, i) => (
-              <motion.div key={item.year} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
+              <motion.div key={item.year} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
                 className={`relative pl-12 md:pl-0 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'md:ml-0 md:pr-12' : 'md:ml-[calc(50%+2rem)]'}`}>
                 <div className="absolute left-2.5 md:left-auto md:right-auto top-4 w-3 h-3 rounded-full gradient-bg" style={i % 2 === 0 ? { right: 'auto', left: '8px' } : { left: '8px' }} />
                 <div className="card">

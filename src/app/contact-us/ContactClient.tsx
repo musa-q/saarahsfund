@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { contactDetails } from '@/content/site'
 
@@ -7,8 +8,8 @@ export default function ContactClient() {
   const shareText = "Support Saarah's Fund - helping save newborn lives. Please donate today."
 
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="contact-us">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">Get in Touch</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
@@ -32,9 +33,9 @@ export default function ContactClient() {
             <p className="text-white/85 leading-relaxed mb-6">
               Your donations help us continue our vital work supporting children and families. Every contribution makes a difference.
             </p>
-            <a href="https://donate.kindlink.com/Saarah-s-Fund/2883" target="_blank" rel="noopener noreferrer" className="btn-white w-full justify-center mb-8 block text-center">
+            <Link href="/donate" className="btn-white w-full justify-center mb-8 block text-center">
               Donate Now
-            </a>
+            </Link>
 
             <h3 className="font-semibold text-lg mb-2">Share Our Mission</h3>
             <p className="text-white/75 text-sm mb-4">Help us spread the word about our work and make a bigger impact.</p>

@@ -13,7 +13,7 @@ const links = [
 
 export default function UsefulLinksPage() {
   return (
-    <div className="section container-lg">
+    <div className="content section container-lg" data-page="useful-links">
       <h1 className="page-title text-center mb-2">Useful Links</h1>
       <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 

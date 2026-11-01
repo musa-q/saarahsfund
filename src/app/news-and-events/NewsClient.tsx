@@ -48,14 +48,14 @@ export default function NewsClient() {
   const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null)
 
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="news-and-events">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">News &amp; Events</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
         <div className="space-y-8 mb-20">
           {events.map((event, i) => (
-            <motion.div key={event.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+            <motion.div key={event.title} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
               <div className="card overflow-hidden p-0">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                   <button type="button" aria-label={`View ${event.title} gallery`} className="relative overflow-hidden cursor-pointer group text-left" onClick={() => setSelectedEvent(event)} style={{ minHeight: 240 }}>
@@ -85,7 +85,7 @@ export default function NewsClient() {
         <h2 className="section-title text-center mb-10">Fundraising Activities</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {fundraising.map((item, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+            <motion.div key={i} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
               <div className="card p-0 overflow-hidden">
                 <div className="h-44 overflow-hidden">
                   <img src={item.image} alt={item.activity} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }} />

@@ -10,8 +10,8 @@ const milestones = [
 
 export default function TenYearClient() {
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="ten-year-anniversary">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">10 Year Anniversary Appeal</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-6" />
         <p className="text-gray-600 text-center text-lg max-w-2xl mx-auto mb-14 leading-relaxed">
@@ -22,7 +22,7 @@ export default function TenYearClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {milestones.map((m, i) => (
-            <motion.div key={m.year} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}>
+            <motion.div key={m.year} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}>
               <div className="card hover:shadow-xl">
                 <div className="h-52 overflow-hidden rounded-xl mb-4">
                   <img src={m.image} alt={m.title} className="w-full h-full object-contain bg-gray-50 hover:scale-105 transition-transform duration-500" onError={(e) => { (e.target as HTMLImageElement).style.display='none'}} />

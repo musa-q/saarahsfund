@@ -17,3 +17,20 @@ export const sudanUpdate = {
   summary: 'May 2026 update: donations had funded 100 low-cost incubators across Sudan, helping over 2,400 newborns.',
   appeal: 'Hundreds more incubators are needed. Please donate and share the appeal to help us reach more babies.',
 } as const
+
+export const gazaAppeal = {
+  title: 'Help Save Newborns in Gaza',
+  summary: 'Help provide low-cost incubators for newborn babies in Gaza. Your support helps us provide vital equipment for their care.',
+  href: '/gaza-incubator-appeal',
+  // The Gaza JustGiving and GoFundMe URLs were not included in the supplied screenshots.
+  // Add the confirmed campaign destinations here so Home and the appeal stay in sync.
+  donationLinks: [
+    { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/nKqJj' },
+  ],
+} as const
+
+export const sudanDonationLinks = [
+  { label: 'Donate via JustGiving', href: 'https://checkout.justgiving.com/x7ex5arrut' },
+  { label: 'Donate via GoFundMe', href: 'https://www.gofundme.com/f/sudan-incubator-appeal' },
+  { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/ndpqe' },
+] as const

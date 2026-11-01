@@ -37,6 +37,9 @@ jobs:
       - name: Test export normalization
         run: npm test
 
+      - name: Verify production pages and content
+        run: npm run verify:export
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

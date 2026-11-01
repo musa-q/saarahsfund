@@ -1,7 +1,9 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import Modal from '@/components/Modal'
+import { gazaAppeal } from '@/content/site'
 
 const platforms = [
   { name: 'Wonderful.org', description: 'Support our campaigns through Wonderful.org. Choose specific projects to support.', link: 'https://wonderful.org/charities/1143322', icon: '/images/wonderful.svg' },
@@ -9,16 +11,16 @@ const platforms = [
 ]
 
 const campaigns = [
-  { title: 'Support Infants in Gaza - Incubator Appeal', link: 'https://wonderful.org/fundraisers/RmE4R' },
-  { title: 'Save Newborn Lives - Sudan Incubator Appeal', link: 'https://wonderful.org/fundraisers/ndpqe' },
+  { title: gazaAppeal.title, link: gazaAppeal.href },
+  { title: 'Save Newborn Lives - Sudan Incubator Appeal', link: '/sudan-incubator-appeal' },
 ]
 
 export default function DonateClient() {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="donate">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">Support Our Mission</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
@@ -39,7 +41,7 @@ export default function DonateClient() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
           {platforms.map((platform, i) => (
-            <motion.div key={platform.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+            <motion.div key={platform.name} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
               <div className="card flex flex-col h-full hover:shadow-xl">
                 <div className="h-16 flex items-center justify-center mb-4">
                   <img src={platform.icon} alt={platform.name} className="h-12 w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }} />
@@ -82,11 +84,11 @@ export default function DonateClient() {
             </div>
             <div className="space-y-3">
               {campaigns.map((campaign) => (
-                <a key={campaign.link} href={campaign.link} target="_blank" rel="noopener noreferrer"
+                <Link key={campaign.link} href={campaign.link} onClick={() => setModalOpen(false)}
                   className="block p-4 rounded-2xl bg-gray-50 hover:bg-pink-50 border border-gray-100 hover:border-pink-200 transition-colors group">
                   <span className="font-medium text-gray-800 group-hover:text-pink-600 transition-colors">{campaign.title}</span>
-                  <span className="block text-xs text-gray-600 mt-1">wonderful.org</span>
-                </a>
+                  <span className="block text-xs text-gray-600 mt-1">View appeal and donation options →</span>
+                </Link>
               ))}
             </div>
           </motion.div>

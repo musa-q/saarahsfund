@@ -1,6 +1,7 @@
 'use client'
-import { useState, useEffect, useCallback, useSyncExternalStore } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
+import Modal from '@/components/Modal'
 
 const motionPreference = '(prefers-reduced-motion: reduce)'
 const subscribeMotionPreference = (onChange: () => void) => {
@@ -17,82 +18,69 @@ interface SlideshowProps {
   interval?: number
   className?: string
   objectFit?: 'cover' | 'contain'
+  label?: string
 }
 
-export default function Slideshow({ images, autoPlay = true, interval = 3000, className = '', objectFit = 'cover' }: SlideshowProps) {
+const photoDescriptions: Record<string, string> = {
+  '/images/sudan-baby-1.jpeg': 'A newborn receiving care in an Embrace infant warmer in Sudan',
+  '/images/sa8-crop-u4525.jpg': 'Saarah smiling outdoors in a green cardigan',
+  '/images/iman hospital.jpg': 'Incubator care at Imaan Hospital in Syria',
+  '/images/sa2.jpg': 'A family photograph of Saarah',
+  '/images/img_0884.jpg': 'Saarah with her family',
+  '/images/01040008.jpg': 'The play train at Oxford Children’s Hospital',
+  '/images/the difference youre making.jpg': 'A project update showing the difference your support makes',
+}
+
+export default function Slideshow({ images, autoPlay = false, interval = 3000, className = '', objectFit = 'cover', label = 'Photo gallery' }: SlideshowProps) {
   const [current, setCurrent] = useState(0)
   const [focused, setFocused] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const [lightbox, setLightbox] = useState(false)
   const reducedMotion = useSyncExternalStore(subscribeMotionPreference, getMotionPreference, getServerMotionPreference)
   const activeIndex = current < images.length ? current : 0
-  const rotating = autoPlay && !focused && !hovered && !reducedMotion && images.length > 1
-
-  const next = useCallback(() => setCurrent((i) => images.length ? (i + 1) % images.length : 0), [images.length])
-  const prev = () => setCurrent((i) => images.length ? (i - 1 + images.length) % images.length : 0)
+  const rotating = autoPlay && !focused && !hovered && !lightbox && !reducedMotion && images.length > 1
+  const advance = useCallback((step: number) => setCurrent(index => images.length ? (index + step + images.length) % images.length : 0), [images.length])
 
   useEffect(() => {
     if (!rotating) return
-    const timer = setInterval(next, interval)
+    const timer = setInterval(() => advance(1), interval)
     return () => clearInterval(timer)
-  }, [rotating, interval, next])
+  }, [rotating, interval, advance])
 
   if (!images.length) return null
+  const alt = photoDescriptions[images[activeIndex]] || `${label} — photo ${activeIndex + 1} of ${images.length}`
 
   return (
-    <div
-      role="region"
-      aria-roledescription="carousel"
-      aria-label="Photo gallery"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false)
-      }}
-      className={`relative overflow-hidden rounded-2xl ${className}`}
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={images[activeIndex]}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reducedMotion ? 0 : 0.5 }}
-          className="w-full h-full"
-        >
-          <img
-            src={images[activeIndex]}
-            alt={`Gallery photo ${activeIndex + 1} of ${images.length}`}
-            className={`w-full h-full ${objectFit === 'cover' ? 'object-cover' : 'object-contain'}`}
-          />
-        </motion.div>
-      </AnimatePresence>
-
-      {images.length > 1 && (
-        <>
-          <button type="button" aria-label="Previous photo" onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center shadow hover:bg-white transition-colors z-10">
-            <svg aria-hidden="true" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button type="button" aria-label="Next photo" onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center shadow hover:bg-white transition-colors z-10">
-            <svg aria-hidden="true" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
-          </button>
-          <p className="sr-only" aria-live={rotating ? 'off' : 'polite'} aria-atomic="true">Photo {activeIndex + 1} of {images.length}</p>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex flex-wrap justify-center max-w-[80%] z-10">
-            {images.map((_, i) => (
-              <button
-                type="button"
-                key={i}
-                aria-label={`Show photo ${i + 1}`}
-                aria-current={i === activeIndex ? 'true' : undefined}
-                onClick={() => setCurrent(i)}
-                className="flex h-6 w-6 items-center justify-center rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              >
-                <span className={`h-2 rounded-full shadow ${i === activeIndex ? 'bg-white w-4' : 'bg-white/70 w-2'}`} />
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <div role="region" aria-roledescription="carousel" aria-label={label} className={`gallery ${className}`}
+        onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+        onFocusCapture={() => setFocused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false) }}
+        onKeyDown={event => {
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault()
+            advance(event.key === 'ArrowRight' ? 1 : -1)
+          }
+        }}>
+        <a className="gallery-photo" href={images[activeIndex]} onClick={event => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+          event.preventDefault(); setLightbox(true)
+        }}>
+          <img src={images[activeIndex]} alt={alt} width={574} height={1020} decoding="async" style={{ objectFit }} />
+        </a>
+        {images.length > 1 && <div className="gallery-controls">
+          <button type="button" aria-label="Previous photo" onClick={() => advance(-1)}>←</button>
+          <span className="gallery-count" aria-live={rotating ? 'off' : 'polite'} aria-atomic="true">{activeIndex + 1} / {images.length}</span>
+          <button type="button" aria-label="Next photo" onClick={() => advance(1)}>→</button>
+        </div>}
+        <noscript><details><summary>See all {images.length} photos</summary>{images.map((src, i) => <a className="block" href={src} key={src}>Photo {i + 1}</a>)}</details></noscript>
+      </div>
+      {lightbox && <Modal label={alt} onClose={() => setLightbox(false)} className="photo-overlay">
+        <div className="photo-modal">
+          <button type="button" className="photo-close" aria-label="Close photograph" autoFocus onClick={() => setLightbox(false)}>Close ×</button>
+          <img src={images[activeIndex]} alt={alt} />
+          <p>{alt}</p>
+        </div>
+      </Modal>}
+    </>
   )
 }

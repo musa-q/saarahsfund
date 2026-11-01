@@ -2,14 +2,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Modal from '@/components/Modal'
-import { sudanUpdate } from '@/content/site'
+import { sudanUpdate, sudanDonationLinks } from '@/content/site'
 
-const donationLinks = [
-  { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/ndpqe' },
-  { label: 'Donate via PayPal', href: 'https://www.paypal.com/GB/fundraiser/charity/3211295' },
-  { label: 'Donate via GoFundMe', href: 'https://www.gofundme.com/f/sudan-incubator-appeal' },
-  { label: 'Donate via KindLink', href: 'https://www.kindlink.com/fundraising/Saarah-s-Fund/sudan' },
-]
+
 
 const photos = [
   { src: '/images/sudan-baby-1.jpeg', alt: 'Newborn baby in an Embrace low-cost incubator in Sudan' },
@@ -27,8 +22,8 @@ export default function SudanClient() {
   const [lightbox, setLightbox] = useState<typeof photos[number] | null>(null)
 
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="sudan-incubator-appeal">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
 
         {/* Header */}
         <div className="text-center mb-12">
@@ -60,7 +55,7 @@ export default function SudanClient() {
           <h2 className="text-2xl font-bold mb-2">Donate to the Sudan Appeal</h2>
           <p className="text-white/80 text-sm mb-6">Your donation is Zakat eligible. Please donate today and help give the gift of life.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
-            {donationLinks.map((link) => (
+            {sudanDonationLinks.map((link) => (
               <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-white">
                 {link.label}
               </a>
@@ -106,7 +101,7 @@ export default function SudanClient() {
           {photos.map((photo, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 16 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
@@ -154,12 +149,7 @@ export default function SudanClient() {
           <h2 className="section-title text-center mb-3">Ramadan Mubarak</h2>
           <p className="text-gray-500 text-center text-sm mb-6">A message from our partners at Embrace Global</p>
           <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100">
-            <iframe
-              src="/ramadan-mubarak.pdf"
-              className="w-full"
-              style={{ height: '600px' }}
-              title="Ramadan Mubarak card from Embrace Global"
-            />
+            <a className="pdf-preview" href="/ramadan-mubarak.pdf"><img src="/images/ramadan-mubarak-preview.png" width={1051} height={1400} loading="lazy" decoding="async" alt="Ramadan Mubarak card from Embrace Global — open the original PDF" /></a>
           </div>
           <p className="text-center mt-3">
             <a
@@ -180,7 +170,7 @@ export default function SudanClient() {
             Your donation contributes towards vital equipment for babies in Sudan. Thank you for your generosity and compassion.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
-            {donationLinks.map((link) => (
+            {sudanDonationLinks.map((link) => (
               <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-white">
                 {link.label}
               </a>

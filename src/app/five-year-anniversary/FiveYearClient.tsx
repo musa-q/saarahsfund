@@ -10,8 +10,8 @@ const achievements = [
 
 export default function FiveYearClient() {
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="five-year-anniversary">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">Five Years of Impact</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
@@ -28,7 +28,7 @@ export default function FiveYearClient() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {achievements.map((a, i) => (
-            <motion.div key={a.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
+            <motion.div key={a.title} initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
               <div className="card hover:shadow-xl">
                 <div className="h-44 overflow-hidden rounded-xl mb-4">
                   <img src={a.image} alt={a.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />

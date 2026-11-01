@@ -18,6 +18,7 @@ npm run lint
 npm test
 npm run build
 npm run typecheck
+npm run verify:export
 git diff --check
 ```
 
@@ -31,6 +32,10 @@ Development and preview servers bind to localhost. Build before starting the pre
 
 The build automatically runs `scripts/normalize-export.mjs` to work around a [Next.js Windows export defect](https://github.com/vercel/next.js/issues/92339): it adds the flat route-payload filenames requested by browser navigation. Correct Linux exports are unchanged. Deploy the complete resulting `out/` directory.
 
+## Approved redesign
+
+The Blush & Plum design is implemented in the production app. See [production readiness](docs/production-readiness.md) for the retained content, verification and release package, and [the implementation plan](docs/blush-plum-production-plan.md). All 14 routes, including the existing Gaza appeal update, are retained. The private design gallery is separate from production.
+
 ## Where to edit
 
 | Content | Source |
@@ -38,6 +43,7 @@ The build automatically runs `scripts/normalize-export.mjs` to work around a [Ne
 | Current charity totals and contact details | `src/content/site.ts` |
 | Shared impact metrics | `src/components/ImpactMetrics.tsx` |
 | Homepage | `src/app/HomeClient.tsx` (content), `src/app/page.tsx` (metadata) |
+| Gaza appeal, shared homepage copy and donation links | `src/app/gaza-incubator-appeal/`, `src/content/site.ts` |
 | About | `src/app/about/AboutClient.tsx` |
 | Our Impact and historical breakdown | `src/app/our-impact/OurImpactClient.tsx` |
 | Sudan appeal and search description | `src/app/sudan-incubator-appeal/SudanClient.tsx`, `page.tsx` |
@@ -45,6 +51,8 @@ The build automatically runs `scripts/normalize-export.mjs` to work around a [Ne
 | Contact | `src/app/contact-us/ContactClient.tsx` |
 | Site-wide contact/navigation | `src/components/Footer.tsx`, `Navbar.tsx` |
 | Images, videos and PDF assets | `public/` |
+| Approved palette and responsive layout | `src/app/design.css` |
+| Shared navigation destinations | `src/content/navigation.ts` |
 
 The September 2026 charity-wide figures are 400+ incubators, £275,000 raised and 9,800+ babies helped. Sudan's May 2026 update is a separate, dated report of 100 low-cost incubators and over 2,400 newborns helped. Do not substitute the global totals into country-specific reports or overwrite dated historical results.
 

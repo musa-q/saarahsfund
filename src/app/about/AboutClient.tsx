@@ -5,8 +5,8 @@ import ImpactMetrics from '@/components/ImpactMetrics'
 
 export default function AboutClient() {
   return (
-    <div className="section container-lg">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+    <div className="content section container-lg" data-page="about">
+      <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h1 className="page-title text-center mb-2">About Us</h1>
         <div className="w-24 h-1 gradient-bg rounded mx-auto mb-12" />
 
