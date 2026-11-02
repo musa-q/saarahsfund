@@ -43,7 +43,7 @@ export default function SudanClient() {
             {sudanUpdate.summary}
           </p>
           <p className="text-gray-700 leading-relaxed text-lg mb-4">
-            Sudan is facing a devastating humanitarian crisis. Hospitals are overwhelmed, medical supplies are scarce, and newborn babies are dying from conditions that are entirely preventable with the right equipment. These low-cost incubators — developed by Embrace Global — are robust, easy to use, and can be operated without a constant power supply, making them ideal for use in Sudan's challenging conditions.
+            Sudan is facing a devastating humanitarian crisis. Hospitals are overwhelmed, medical supplies are scarce, and newborn babies are dying from conditions that are entirely preventable with the right equipment. These low-cost incubators, developed by Embrace Global, are robust, easy to use, and can be operated without a constant power supply, making them ideal for use in Sudan's challenging conditions.
           </p>
           <p className="text-[#a82258] font-semibold text-lg">
             {sudanUpdate.appeal}
@@ -149,7 +149,7 @@ export default function SudanClient() {
           <h2 className="section-title text-center mb-3">Ramadan Mubarak</h2>
           <p className="text-gray-500 text-center text-sm mb-6">A message from our partners at Embrace Global</p>
           <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100">
-            <a className="pdf-preview" href="/ramadan-mubarak.pdf"><img src="/images/ramadan-mubarak-preview.png" width={1051} height={1400} loading="lazy" decoding="async" alt="Ramadan Mubarak card from Embrace Global — open the original PDF" /></a>
+            <a className="pdf-preview" href="/ramadan-mubarak.pdf"><img src="/images/ramadan-mubarak-preview.png" width={1051} height={1400} loading="lazy" decoding="async" alt="Ramadan Mubarak card from Embrace Global - open the original PDF" /></a>
           </div>
           <p className="text-center mt-3">
             <a

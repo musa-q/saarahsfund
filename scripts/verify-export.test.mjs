@@ -1,4 +1,5 @@
 import test from 'node:test'
+import { createHash } from 'node:crypto'
 import assert from 'node:assert/strict'
 import { readFile, access, readdir } from 'node:fs/promises'
 import { resolve, join } from 'node:path'
@@ -7,7 +8,7 @@ const root = resolve(import.meta.dirname, '..')
 const output = join(root, 'out')
 const baseline = JSON.parse(await readFile(join(import.meta.dirname, 'fixtures/content-baseline.json'), 'utf8'))
 const decode = value => value.replace(/&#x([\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16))).replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n))).replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')
-const text = html => decode(html.replace(/<!--[\s\S]*?-->/g, '').replace(/<[^>]*>/g, ' ')).replace(/\s+([,:;.])/g, '$1').replace(/\s+/g, ' ').trim()
+const text = html => decode(html.replace(/<!--[\s\S]*?-->/g, '').replace(/<[^>]*>/g, ' ')).replaceAll('needs — powered', 'needs, powered').replaceAll('incubators — developed by Embrace Global — are', 'incubators, developed by Embrace Global, are').replace(/\s+([,:;.])/g, '$1').replace(/\s+/g, ' ').trim()
 const attrs = (html, name) => [...html.matchAll(new RegExp(`\\b${name}="([^"]*)"`, 'g'))].map(m => decode(m[1]))
 
 for (const [route, source] of Object.entries(baseline)) {
@@ -17,6 +18,7 @@ for (const [route, source] of Object.entries(baseline)) {
     assert.ok(main, 'Rendered main content')
     assert.equal((main.match(/<h1\b/g) || []).length, 1)
     for (const paragraph of source.paragraphs) assert.ok(text(main).includes(text(paragraph)), `Missing source paragraph: ${paragraph}`)
+    assert.ok(!/—|&mdash;|&#(?:8212|x2014);|\\u2014/i.test(html), 'No em dashes in copy, metadata, or image descriptions')
     const hrefs = attrs(html, 'href')
     for (const href of source.links) assert.ok(hrefs.includes(href), `Missing destination: ${href}`)
     assert.ok(html.includes(`rel="canonical" href="https://www.saarahsfund.com${route}"`), 'Canonical URL')
@@ -47,4 +49,13 @@ test('production package contains no concept gallery or mockup images', async ()
   const files = await readdir(output, { recursive: true })
   const reviewAssets = files.filter(file => /(?:^|[/\\])(?:concepts|design-concepts)(?:[/\\]|$)|(?:a-blush-plum|b-pink-navy|c-rose-sage)\.png$/i.test(file))
   assert.deepEqual(reviewAssets, [], 'Do not ship archived design concepts')
+})
+
+// Byte-for-byte comparison against the original public assets captured before redesign.
+test('original photographs, documents and videos are unchanged', async () => {
+  const media = JSON.parse(await readFile(join(import.meta.dirname, 'fixtures/media-baseline.json'), 'utf8'))
+  for (const [asset, expected] of Object.entries(media)) {
+    const bytes = await readFile(join(output, asset))
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), expected, asset)
+  }
 })

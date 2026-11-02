@@ -48,7 +48,7 @@ export default function Slideshow({ images, autoPlay = false, interval = 3000, c
   }, [rotating, interval, advance])
 
   if (!images.length) return null
-  const alt = photoDescriptions[images[activeIndex]] || `${label} — photo ${activeIndex + 1} of ${images.length}`
+  const alt = photoDescriptions[images[activeIndex]] || `${label} - photo ${activeIndex + 1} of ${images.length}`
 
   return (
     <>

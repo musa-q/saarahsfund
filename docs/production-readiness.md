@@ -27,7 +27,7 @@ git diff --check
 npm start
 ```
 
-`npm test` contains three export-normalization tests. `npm run verify:export` contains 16 production checks: 14 routes compared with the pre-redesign working-tree content, the approved design palette, and exclusion of the concept gallery and mockup images. Each page also rejects design-concept links and controls. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
+`npm test` contains three export-normalization tests. `npm run verify:export` contains 17 production checks: 14 routes compared with the pre-redesign working-tree content, the approved design palette, exclusion of the concept gallery and mockup images, and byte-for-byte preservation of 280 original media files. Each page also rejects design-concept links, controls and em dashes. Copy comparison allows only the requested em-dash punctuation replacements; the archived paragraph baseline remains unchanged. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
 
 Browser checks use the actual production export, not a development server. Chromium checks cover all 14 pages at 390px; homepage layouts at 320/390/768/1440px; client-side navigation and persisted figures after hydration; ten country dialogs; donation campaign choices; gallery previous/next/enlargement; Escape and focus restoration; image decoding; reduced-motion preference; no-JavaScript readability; and local Gaza video playback. No runtime errors or failed resource requests occurred. The Browser plugin was unavailable, so the installed local Playwright/Chromium tooling was used. Screenshots and the temporary browser script are outside the repository under `/tmp/`.
 
@@ -52,7 +52,7 @@ On 2 November 2026, all 16 export checks and three normalization tests passed af
 
 The complete final `out/` directory is packaged outside the repository under:
 
-`/home/clawpi/Documents/SaarahsFund/releases/2026-11-01/`
+`/home/clawpi/Documents/SaarahsFund/releases/2026-11-02/`
 
 The archive includes HTML, JavaScript, route payloads, original media and `.htaccess` from the same build. File checksums and an archive checksum accompany it. Deploy the complete export; uploading individual edited HTML files would reintroduce the former hydration mismatch.
 
@@ -61,3 +61,13 @@ The archive includes HTML, JavaScript, route payloads, original media and `.htac
 The repository's `AGENTS.md` and deployment instructions require verifying the FTP account's root and retaining a recoverable backup of server-only files and the current deployment. These hosting facts have not been verified by this local work. The workflow uploads to `server-dir: /`, is serialized, and has clean-slate deletion disabled, but synchronization is still non-atomic.
 
 Once those hosting prerequisites are satisfied and publication is requested, use the established `master` deployment process, inspect both build and FTP results, and check the live pages in a fresh browser. No FTP operation, push to `master`, payment or outbound message was performed during this preparation.
+
+## Original copy correction, 2 November 2026
+
+The original homepage title, impact heading, six-photo sequence and footer labels are restored. The extra story and news sections introduced by the redesign are removed from the homepage; all original pages and navigation remain. The existing Gaza appeal and Sudan information remain unchanged. No original image or video file was edited or replaced.
+
+Only punctuation changes in two original prose passages are authorized: the homepage introductory em dash becomes a comma, and the paired em dashes around “developed by Embrace Global” on the Sudan page become commas. Em dashes in the footer and image descriptions become ordinary hyphens.
+
+The new production build and TypeScript check pass. ESLint reports zero errors and 15 existing image-optimization warnings. Seventeen export checks and three normalization tests pass. Original media checksums are recorded in `scripts/fixtures/media-baseline.json`, derived from the pre-redesign Git revision `f76a11c`; all 280 files match the production export. The updated release package supersedes the 1 November package.
+
+Chromium verification passed again for all 14 mobile pages, four homepage widths, original first photo, hydrated copy without em dashes, menus, dialogs, galleries, local video playback and no-JavaScript content. No runtime or failed-resource errors occurred. The 13-page phone preview passed its separate mobile/browser checks and seven content-preservation checks.

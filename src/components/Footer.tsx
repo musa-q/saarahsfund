@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <h2>Explore</h2>
+          <h2>Quick Links</h2>
           <nav aria-label="Footer navigation">{allPages.map(page => <Link href={page.href} key={page.href}>{page.label}</Link>)}</nav>
         </div>
         <div>
@@ -30,7 +30,7 @@ export default function Footer() {
       </div>
       <div className="wrap footer-bottom">
         <span>© {new Date().getFullYear()} Saarah&apos;s Fund. All rights reserved.</span>
-        <span>Hosted by <a href="https://www.kualo.com/free-charity-hosting">Kualo Charity Web Hosting</a> — Kualo have been kind enough to include us in their free charity hosting project.</span>
+        <span>Hosted by <a href="https://www.kualo.com/free-charity-hosting">Kualo Charity Web Hosting</a> - Kualo have been kind enough to include us in their free charity hosting project.</span>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>
