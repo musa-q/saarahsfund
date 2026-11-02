@@ -11,8 +11,8 @@ export default function Footer() {
           <Link className="brand" href="/"><Image src="/images/saarahsfundlogo5.png" alt="" width={45} height={45} /><span>Saarah’s Fund</span></Link>
           <p>Making a difference in children&apos;s lives through your support. Every contribution helps us provide vital medical equipment and care to children in need.</p>
           <div className="social-links">
-            <a href="https://facebook.com/saarahsfund">Facebook ↗</a>
-            <a href="https://linkedin.com/in/talibali1/">LinkedIn ↗</a>
+            <a href="https://facebook.com/saarahsfund">Facebook</a>
+            <a href="https://linkedin.com/in/talibali1/">LinkedIn</a>
           </div>
         </div>
         <div>
