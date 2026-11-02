@@ -21,7 +21,8 @@ for (const [route, source] of Object.entries(baseline)) {
     for (const href of source.links) assert.ok(hrefs.includes(href), `Missing destination: ${href}`)
     assert.ok(html.includes(`rel="canonical" href="https://www.saarahsfund.com${route}"`), 'Canonical URL')
     assert.ok(!html.includes('noindex'), 'Production must be indexable')
-    assert.ok(!html.includes('chatgpt.site') && !hrefs.includes('/concepts/'), 'No preview-only destinations')
+    assert.ok(!html.includes('chatgpt.site') && !hrefs.some(href => /^\/(?:design-)?concepts(?:[/?#]|$)/.test(href)), 'No preview-only destinations')
+    assert.ok(!/\b(?:view|show) design concepts\b/i.test(text(html)), 'No design-review controls')
     assert.ok(!/style="[^"]*opacity:0/.test(main), 'Initial page content must not wait for JavaScript to become visible')
     for (const src of attrs(html, 'src').concat(attrs(html, 'poster'))) {
       if (!src.startsWith('/')) continue
@@ -40,4 +41,10 @@ test('approved palette is included in production CSS', async () => {
   assert.ok(/#fbeef1/i.test(css), "Blush token")
   assert.ok(/#52283e/i.test(css), "Plum token")
   assert.ok(/#9b3658/i.test(css), "Raspberry token")
+})
+
+test('production package contains no concept gallery or mockup images', async () => {
+  const files = await readdir(output, { recursive: true })
+  const reviewAssets = files.filter(file => /(?:^|[/\\])(?:concepts|design-concepts)(?:[/\\]|$)|(?:a-blush-plum|b-pink-navy|c-rose-sage)\.png$/i.test(file))
+  assert.deepEqual(reviewAssets, [], 'Do not ship archived design concepts')
 })

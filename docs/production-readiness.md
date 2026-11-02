@@ -27,7 +27,7 @@ git diff --check
 npm start
 ```
 
-`npm test` contains three export-normalization tests. `npm run verify:export` contains 15 production checks: 14 routes compared with the pre-redesign working-tree content plus the approved design palette. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
+`npm test` contains three export-normalization tests. `npm run verify:export` contains 16 production checks: 14 routes compared with the pre-redesign working-tree content, the approved design palette, and exclusion of the concept gallery and mockup images. Each page also rejects design-concept links and controls. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
 
 Browser checks use the actual production export, not a development server. Chromium checks cover all 14 pages at 390px; homepage layouts at 320/390/768/1440px; client-side navigation and persisted figures after hydration; ten country dialogs; donation campaign choices; gallery previous/next/enlargement; Escape and focus restoration; image decoding; reduced-motion preference; no-JavaScript readability; and local Gaza video playback. No runtime errors or failed resource requests occurred. The Browser plugin was unavailable, so the installed local Playwright/Chromium tooling was used. Screenshots and the temporary browser script are outside the repository under `/tmp/`.
 
@@ -47,6 +47,8 @@ The initial runtime npm audit reported one critical and two high package finding
 - Release archive contents were compared by SHA-256 with every file in the verified export.
 
 ## Release package
+
+On 2 November 2026, all 16 export checks and three normalization tests passed after adding the design-review exclusion guard. The separately hosted phone preview also had its concepts link, gallery and mockup images removed. No production application or exported assets changed; the verified release archive remains unchanged.
 
 The complete final `out/` directory is packaged outside the repository under:
 
