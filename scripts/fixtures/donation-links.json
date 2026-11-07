@@ -1,0 +1,30 @@
+{
+  "gaza": [
+    {
+      "label": "Donate via JustGiving",
+      "href": "https://checkout.justgiving.com/gbr4stupkl"
+    },
+    {
+      "label": "Donate via GoFundMe",
+      "href": "https://gofund.me/e93724b03"
+    },
+    {
+      "label": "Donate via Wonderful",
+      "href": "https://wonderful.org/fundraisers/nKqJj"
+    }
+  ],
+  "sudan": [
+    {
+      "label": "Donate via JustGiving",
+      "href": "https://checkout.justgiving.com/x7ex5arrut"
+    },
+    {
+      "label": "Donate via GoFundMe",
+      "href": "https://www.gofundme.com/f/sudan-incubator-appeal"
+    },
+    {
+      "label": "Donate via Wonderful",
+      "href": "https://wonderful.org/fundraisers/ndpqe"
+    }
+  ]
+}

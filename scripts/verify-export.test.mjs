@@ -59,3 +59,20 @@ test('original photographs, documents and videos are unchanged', async () => {
     assert.equal(createHash('sha256').update(bytes).digest('hex'), expected, asset)
   }
 })
+
+// Confirmed by Talib on 8 and 19 October 2026; campaign destinations are distinct.
+test('Gaza and Sudan each show the three confirmed donation links', async () => {
+  const campaigns = JSON.parse(await readFile(join(import.meta.dirname, 'fixtures/donation-links.json'), 'utf8'))
+  for (const [route, campaign] of [['/', 'gaza'], ['/gaza-incubator-appeal/', 'gaza'], ['/sudan-incubator-appeal/', 'sudan']]) {
+    const html = await readFile(join(output, route, 'index.html'), 'utf8')
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)[1]
+    const links = [...main.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)]
+      .filter(match => /^Donate via /.test(text(match[2])))
+      .map(match => ({ label: text(match[2]), href: decode(match[1]) }))
+    const unique = [...new Map(links.map(link => [link.href, link])).values()]
+    assert.deepEqual(unique, campaigns[campaign], route)
+  }
+  for (const file of (await readdir(output, { recursive: true })).filter(file => file.endsWith('.html'))) {
+    assert.ok(!attrs(await readFile(join(output, file), 'utf8'), 'href').some(href => /paypal|kindlink/i.test(href)), `Retired donation link in ${file}`)
+  }
+})

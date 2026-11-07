@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Slideshow from '@/components/Slideshow'
-import { charityTotals, gazaAppeal, sudanUpdate, sudanDonationLinks } from '@/content/site'
+import { charityTotals, gazaAppeal } from '@/content/site'
 
 const slideshowImages = [
   '/images/sa8-crop-u4525.jpg',
@@ -54,18 +54,6 @@ export default function HomePage() {
           <p className="intro">{gazaAppeal.summary}</p>
           <div className="actions appeal-actions">{gazaAppeal.donationLinks.map(link => <a key={link.href} href={link.href} className="button" target="_blank" rel="noopener noreferrer">{link.label}</a>)}</div>
           <Link href={gazaAppeal.href} className="text-link">Find out more about our Gaza appeal →</Link>
-        </div>
-      </section>
-
-      <section className="sudan-band">
-        <div className="wrap sudan-feature">
-          <div>
-            <h2>Sudan Incubator Appeal</h2>
-            <p>{sudanUpdate.summary}</p><p>{sudanUpdate.appeal}</p>
-            <div className="actions">{sudanDonationLinks.map(link => <a href={link.href} key={link.href} className="button button-outline">{link.label}</a>)}</div>
-            <Link href="/sudan-incubator-appeal" className="text-link">To find out more about our Sudan work, please click here →</Link>
-          </div>
-          <img src="/images/sudan-training-1.jpeg" alt="Healthcare workers training to use low-cost incubators in Sudan" width={1080} height={1080} loading="lazy" decoding="async" />
         </div>
       </section>
 

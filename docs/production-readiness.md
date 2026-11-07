@@ -27,7 +27,7 @@ git diff --check
 npm start
 ```
 
-`npm test` contains three export-normalization tests. `npm run verify:export` contains 17 production checks: 14 routes compared with the pre-redesign working-tree content, the approved design palette, exclusion of the concept gallery and mockup images, and byte-for-byte preservation of 280 original media files. Each page also rejects design-concept links, controls and em dashes. Copy comparison allows only the requested em-dash punctuation replacements; the archived paragraph baseline remains unchanged. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
+`npm test` contains three export-normalization tests. `npm run verify:export` contains 18 production checks: 14 routes compared with the pre-redesign working-tree content, the approved design palette, exclusion of the concept gallery and mockup images, byte-for-byte preservation of 280 original media files, and the confirmed Gaza/Sudan donation destinations. Each page also rejects design-concept links, controls and em dashes. Copy comparison allows only the requested em-dash punctuation replacements; the archived paragraph baseline remains unchanged. It checks paragraphs, existing destination URLs, local images/video/poster files, canonical URLs, indexability and initial content visibility. The baseline fixture is a regression record; change it only for deliberate content changes.
 
 Browser checks use the actual production export, not a development server. Chromium checks cover all 14 pages at 390px; homepage layouts at 320/390/768/1440px; client-side navigation and persisted figures after hydration; ten country dialogs; donation campaign choices; gallery previous/next/enlargement; Escape and focus restoration; image decoding; reduced-motion preference; no-JavaScript readability; and local Gaza video playback. No runtime errors or failed resource requests occurred. The Browser plugin was unavailable, so the installed local Playwright/Chromium tooling was used. Screenshots and the temporary browser script are outside the repository under `/tmp/`.
 
@@ -52,7 +52,7 @@ On 2 November 2026, all 16 export checks and three normalization tests passed af
 
 The complete final `out/` directory is packaged outside the repository under:
 
-`/home/clawpi/Documents/SaarahsFund/releases/2026-11-02/`
+`/home/clawpi/Documents/SaarahsFund/releases/2026-11-07/`
 
 The archive includes HTML, JavaScript, route payloads, original media and `.htaccess` from the same build. File checksums and an archive checksum accompany it. Deploy the complete export; uploading individual edited HTML files would reintroduce the former hydration mismatch.
 
@@ -71,3 +71,11 @@ Only punctuation changes in two original prose passages are authorized: the home
 The new production build and TypeScript check pass. ESLint reports zero errors and 15 existing image-optimization warnings. Seventeen export checks and three normalization tests pass. Original media checksums are recorded in `scripts/fixtures/media-baseline.json`, derived from the pre-redesign Git revision `f76a11c`; all 280 files match the production export. The updated release package supersedes the 1 November package.
 
 Chromium verification passed again for all 14 mobile pages, four homepage widths, original first photo, hydrated copy without em dashes, menus, dialogs, galleries, local video playback and no-JavaScript content. No runtime or failed-resource errors occurred. The 13-page phone preview passed its separate mobile/browser checks and seven content-preservation checks.
+
+## Donation correction, 7 November 2026
+
+The supplied chat confirms Gaza JustGiving (`https://checkout.justgiving.com/gbr4stupkl`) and GoFundMe (`https://gofund.me/e93724b03`) on 8 October, with Wonderful (`https://wonderful.org/fundraisers/nKqJj`) on 19 October. The 19 October instructions specify three separate buttons for Gaza on the homepage and Gaza appeal page, and three for Sudan on its appeal page, with all PayPal and KindLink links removed.
+
+Gaza's shared donation list now includes all three confirmed destinations. The secondary Sudan homepage section has been removed to follow the request to replace the homepage appeal with Gaza; all Sudan information remains on its appeal page. Sudan's existing three destinations match the supplied messages, including JustGiving `https://checkout.justgiving.com/x7ex5arrut`. The phone preview now includes the same Gaza appeal and donation choices, and its retired KindLink contact button is replaced with the supplied JustGiving link. Historical source snapshots remain untouched; regression checks explicitly permit the requested campaign changes.
+
+The production build, TypeScript check, 18 export checks and three normalization tests pass. ESLint reports zero errors and 14 established image warnings. Original media files remain byte-for-byte identical. The preview passes eight preservation checks and its browser checks across all 14 mobile routes. These changes update the private preview and prepared production package; the original Kualo domain has not been deployed. The remaining historical chat requests are outside this donation correction.

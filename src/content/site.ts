@@ -22,9 +22,10 @@ export const gazaAppeal = {
   title: 'Help Save Newborns in Gaza',
   summary: 'Help provide low-cost incubators for newborn babies in Gaza. Your support helps us provide vital equipment for their care.',
   href: '/gaza-incubator-appeal',
-  // The Gaza JustGiving and GoFundMe URLs were not included in the supplied screenshots.
-  // Add the confirmed campaign destinations here so Home and the appeal stay in sync.
+  // Confirmed by Talib in the 8 and 19 October 2026 messages.
   donationLinks: [
+    { label: 'Donate via JustGiving', href: 'https://checkout.justgiving.com/gbr4stupkl' },
+    { label: 'Donate via GoFundMe', href: 'https://gofund.me/e93724b03' },
     { label: 'Donate via Wonderful', href: 'https://wonderful.org/fundraisers/nKqJj' },
   ],
 } as const
