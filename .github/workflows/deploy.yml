@@ -40,6 +40,22 @@ jobs:
       - name: Verify production pages and content
         run: npm run verify:export
 
+      - name: Verify hosting root and back up current website
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          BACKUP_PASSPHRASE: ${{ secrets.DEPLOY_BACKUP_PASSPHRASE }}
+        run: python3 scripts/backup-hosting.py
+
+      - name: Retain encrypted pre-deployment backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-before-${{ github.run_id }}
+          path: ${{ runner.temp }}/saarahs-before-deploy.tar.gz.enc
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
