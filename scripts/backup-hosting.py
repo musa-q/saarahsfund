@@ -5,7 +5,6 @@ import hashlib
 import io
 import os
 from pathlib import Path
-import ssl
 import subprocess
 import tarfile
 import urllib.request
@@ -35,10 +34,10 @@ def add_directory(ftp, archive, directory="/"):
 
 def main():
     destination = Path(os.environ["RUNNER_TEMP"]) / "saarahs-before-deploy.tar.gz.enc"
-    with ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=60) as ftp:
+    # Match the FTP protocol used by the existing Kualo upload action.
+    with ftplib.FTP(timeout=60) as ftp:
         ftp.connect(os.environ["FTP_SERVER"])
         ftp.login(os.environ["FTP_USERNAME"], os.environ["FTP_PASSWORD"])
-        ftp.prot_p()
         homepage = io.BytesIO()
         ftp.retrbinary("RETR /index.html", homepage.write)
         request = urllib.request.Request(
