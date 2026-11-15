@@ -494,13 +494,18 @@ button[hidden],[hidden] {
   grid-template-columns: repeat(3,1fr);
   gap: 28px;
 }
-.video-grid video {
+.video-grid video,
+.video-grid iframe {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
   background: #321a29;
   border-radius: 18px;
   margin-bottom: 22px;
+}
+.video-grid iframe {
+  height: auto;
+  border: 0;
 }
 .video-grid h3 {
   font-size: 25px;
@@ -1067,7 +1072,8 @@ button[hidden],[hidden] {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .video-grid video {
+  .video-grid video,
+  .video-grid iframe {
     aspect-ratio: 16/10;
     margin-bottom: 16px;
   }

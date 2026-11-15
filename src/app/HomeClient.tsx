@@ -14,7 +14,6 @@ const slideshowImages = [
 const videos = [
   { title: 'Gaza Project', subtitle: 'Watch our work in Gaza', src: '/videos/gaza-vid-1.mp4', poster: '/images/gaza-2.jpg' },
   { title: 'Yemen Project', subtitle: 'Watch our work in Yemen', src: '/videos/yemen-vid-2.mp4', poster: '/images/yemen-2.jpg' },
-  { title: 'Embrace Global Partnership', subtitle: 'Our global impact story', src: '/videos/embraceglobal.mp4', poster: '/images/sudan-training-2.jpeg' },
 ]
 
 export default function HomePage() {
@@ -62,7 +61,20 @@ export default function HomePage() {
         <div className="video-grid">{videos.map(video => <article key={video.src}>
           <video controls playsInline preload="none" poster={video.poster} aria-label={video.title}><source src={video.src} type="video/mp4" /><a href={video.src}>Open video</a></video>
           <h3>{video.title}</h3><p>{video.subtitle}</p>
-        </article>)}</div>
+        </article>)}
+          <article>
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/Ny8_nsc-rL4"
+              title="Thank You, Saarah's Fund"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+            <h3>Thank You, Saarah&apos;s Fund</h3>
+            <p>A message from Embrace Global</p>
+          </article>
+        </div>
       </section>
 
       <section className="closing-cta"><div className="wrap"><span aria-hidden="true" className="closing-heart">♡</span><div>

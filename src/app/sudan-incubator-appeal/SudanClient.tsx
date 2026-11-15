@@ -94,6 +94,14 @@ export default function SudanClient() {
           </p>
         </section>
 
+        <section aria-labelledby="sudan-video-heading" className="card mb-12">
+          <h2 id="sudan-video-heading" className="section-title mb-4">Sudan Incubator Project</h2>
+          <video controls playsInline preload="none" poster="/images/sudan-training-2.jpeg" aria-label="Embrace Global incubator project in Sudan" className="w-full aspect-video rounded-xl bg-black">
+            <source src="/videos/embraceglobal.mp4" type="video/mp4" />
+            <a href="/videos/embraceglobal.mp4">Open the Sudan project video</a>
+          </video>
+        </section>
+
         {/* Photo grid */}
         <h2 className="section-title text-center mb-8">Our Work in Sudan</h2>
         <p className="text-gray-600 text-sm text-center mb-6">Click any photo to view full size</p>

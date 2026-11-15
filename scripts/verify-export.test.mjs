@@ -76,3 +76,14 @@ test('Gaza and Sudan each show the three confirmed donation links', async () => 
     assert.ok(!attrs(await readFile(join(output, file), 'utf8'), 'href').some(href => /paypal|kindlink/i.test(href)), `Retired donation link in ${file}`)
   }
 })
+
+test('homepage shows the thank-you video and Sudan retains both project videos', async () => {
+  const home = await readFile(join(output, 'index.html'), 'utf8')
+  const players = [...home.matchAll(/<(video|iframe)\b[^>]*>/g)]
+  assert.deepEqual(players.map(player => player[1]), ['video', 'video', 'iframe'])
+  assert.ok(players[2][0].includes('https://www.youtube-nocookie.com/embed/Ny8_nsc-rL4'))
+  assert.ok(!home.includes('/videos/embraceglobal.mp4'), 'Sudan film belongs on the Sudan appeal')
+  const sudan = await readFile(join(output, 'sudan-incubator-appeal/index.html'), 'utf8')
+  assert.ok(sudan.includes('src="/videos/embraceglobal.mp4"'))
+  assert.ok(sudan.includes('src="/videos/dongola-hospital-feedback.mp4"'))
+})
